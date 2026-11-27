@@ -6,11 +6,18 @@ import { fileURLToPath } from "node:url";
 import healthHandler from "./api/health.js";
 import profileHandler from "./api/profile.js";
 import contactHandler from "./api/contact.js";
+import type { HttpRequest, HttpResponse } from "./lib/http.js";
+
+type ApiHandler = (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = fs.existsSync(path.join(__dirname, "public"))
+  ? __dirname
+  : path.resolve(__dirname, "..");
+const publicDir = path.join(projectRoot, "public");
 const port = Number(process.env.PORT) || 4173;
 
-const MIME_TYPES = {
+const MIME_TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".js": "application/javascript; charset=utf-8",
@@ -21,7 +28,7 @@ const MIME_TYPES = {
   ".ico": "image/x-icon",
 };
 
-const API_ROUTES = {
+const API_ROUTES: Record<string, ApiHandler> = {
   "/api/health": healthHandler,
   "/api/profile": profileHandler,
   "/api/contact": contactHandler,
@@ -33,7 +40,7 @@ const server = http.createServer(async (req, res) => {
   const apiHandler = API_ROUTES[urlPath];
   if (apiHandler) {
     try {
-      await apiHandler(req, res);
+      await apiHandler(req as HttpRequest, res as HttpResponse);
     } catch (err) {
       console.error("[local-server api error]", err);
       if (!res.headersSent) {
@@ -45,14 +52,9 @@ const server = http.createServer(async (req, res) => {
   }
 
   const relPath = urlPath === "/" ? "index.html" : urlPath.replace(/^\/+/, "");
-  const filePath = path.resolve(__dirname, relPath);
+  const filePath = path.resolve(publicDir, relPath);
 
-  if (
-    !filePath.startsWith(__dirname) ||
-    relPath.startsWith("api/") ||
-    relPath.startsWith("lib/") ||
-    relPath === "server.js"
-  ) {
+  if (!filePath.startsWith(publicDir)) {
     res.writeHead(403);
     res.end("Forbidden");
     return;
@@ -73,5 +75,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`SureYeah.cv local server running at http://127.0.0.1:${port}`);
+  console.log(`SureYeah.cv TypeScript server running at http://127.0.0.1:${port}`);
 });

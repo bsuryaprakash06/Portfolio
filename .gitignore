@@ -1,4 +1,6 @@
 .vercel
+.dist-server
+public/main.js
 node_modules
 .env
 .env.local

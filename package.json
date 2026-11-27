@@ -2,13 +2,20 @@
   "name": "sureyeah-cv",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfolio starter for Surya Prakash B (SureYeah.cv) configured for Vercel deployment.",
+  "description": "Portfolio starter for Surya Prakash B (SureYeah.cv) built in TypeScript for Vercel deployment.",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && tsc -p tsconfig.client.json",
+    "build:server": "tsc -p tsconfig.server.json",
+    "dev": "npm run build && npm run build:server && node .dist-server/server.js",
+    "start": "npm run build:server && node .dist-server/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
   }
 }
