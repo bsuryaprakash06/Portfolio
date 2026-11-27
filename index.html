@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Surya Prakash B (SureYeah.cv) — Portfolio currently under construction."
+    />
+    <link rel="canonical" href="https://sureyeah.cv/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sureyeah.cv/" />
+    <meta property="og:title" content="SureYeah.cv — building it." />
+    <meta
+      property="og:description"
+      content="Surya Prakash B — Portfolio currently under construction."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@shenzoz" />
+    <meta name="twitter:title" content="SureYeah.cv — building it." />
+    <meta
+      name="twitter:description"
+      content="Surya Prakash B — Portfolio currently under construction."
+    />
+    <title>SureYeah.cv — building it.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- High-DPI Live Dark Gradient Canvas -->
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+    <!-- Subtle Architectural Grid Overlay -->
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- Vignette & Ultra-Fine Texture Layer -->
+    <div class="vignette-overlay" aria-hidden="true"></div>
+
+    <div class="page-shell">
+      <!-- Top Bar (Top-left intentionally clean, no Portfolio title) -->
+      <header class="top-bar">
+        <nav class="top-nav" aria-label="Primary">
+          <button type="button" class="nav-link" data-panel="about">about</button>
+          <a
+            href="https://github.com/bsuryaprakash06"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-link"
+            >projects</a
+          >
+          <button type="button" class="nav-link" data-panel="contact">contact</button>
+          <button
+            type="button"
+            id="motion-toggle"
+            class="pill-toggle is-active"
+            role="switch"
+            aria-checked="true"
+            aria-label="Toggle live gradient intensity"
+            title="Toggle ambient glow"
+          >
+            <span class="pill-thumb"></span>
+          </button>
+        </nav>
+      </header>
+
+      <!-- Center Hero Message -->
+      <main class="center-stage">
+        <div class="hero-copy">
+          <h1 class="hero-title">building it.</h1>
+          <p class="hero-subtitle">
+            check back soon or check out my work on
+            <a
+              href="https://github.com/bsuryaprakash06"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-link"
+              >github</a
+            >
+          </p>
+        </div>
+
+        <!-- Subtle Status Whisper for Top-Right Nav Clicks -->
+        <div
+          id="status-whisper"
+          class="status-whisper"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </main>
+
+      <!-- Bottom Bar -->
+      <footer class="bottom-bar">
+        <nav class="social-links" aria-label="Social links">
+          <a
+            href="https://github.com/bsuryaprakash06"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >github</a
+          >
+          <span class="separator" aria-hidden="true">/</span>
+          <a
+            href="https://www.linkedin.com/in/bsuryaprakash06"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >linkedin</a
+          >
+          <span class="separator" aria-hidden="true">/</span>
+          <a
+            href="https://x.com/shenzoz"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            >twitter</a
+          >
+          <span class="separator" aria-hidden="true">/</span>
+          <a
+            href="mailto:suryaprakashb2006@gmail.com"
+            class="social-link"
+            id="email-link"
+            title="suryaprakashb2006@gmail.com"
+            >email</a
+          >
+        </nav>
+
+        <div class="bottom-right-meta">
+          <span class="copyright">&copy; 2026 SureYeah.cv</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Minimal Contact Modal backed by POST /api/contact -->
+    <div
+      id="contact-modal"
+      class="contact-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contact-modal-title"
+      hidden
+    >
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <h2 id="contact-modal-title" class="contact-title">contact.</h2>
+          <button
+            type="button"
+            id="contact-close"
+            class="contact-close"
+            aria-label="Close contact dialog"
+          >
+            esc
+          </button>
+        </div>
+
+        <div class="contact-direct-links">
+          <a
+            href="mailto:suryaprakashb2006@gmail.com"
+            class="contact-direct-item"
+          >
+            <span class="contact-direct-label">email</span>
+            <span class="contact-direct-value">suryaprakashb2006@gmail.com</span>
+          </a>
+          <a
+            href="https://x.com/shenzoz"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-direct-item"
+          >
+            <span class="contact-direct-label">twitter</span>
+            <span class="contact-direct-value">@shenzoz</span>
+          </a>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+            class="honeypot-field"
+            aria-hidden="true"
+          />
+
+          <label class="contact-field">
+            <span>name</span>
+            <input
+              type="text"
+              name="name"
+              required
+              minlength="2"
+              maxlength="80"
+              placeholder="your name"
+              autocomplete="name"
+            />
+          </label>
+
+          <label class="contact-field">
+            <span>email</span>
+            <input
+              type="email"
+              name="email"
+              required
+              maxlength="160"
+              placeholder="you@domain.com"
+              autocomplete="email"
+            />
+          </label>
+
+          <label class="contact-field">
+            <span>message</span>
+            <textarea
+              name="message"
+              required
+              minlength="5"
+              maxlength="2000"
+              rows="3"
+              placeholder="say hello..."
+            ></textarea>
+          </label>
+
+          <div class="contact-actions">
+            <p id="contact-feedback" class="contact-feedback" aria-live="polite"></p>
+            <button type="submit" id="contact-submit" class="contact-submit">
+              send
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
